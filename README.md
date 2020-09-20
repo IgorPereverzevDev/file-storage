@@ -135,6 +135,13 @@ Response example
 
     Record removed
     
+
+#   What can be improved 
+
+    add roles for owner and client and access
     
+    add integration testing 
+    
+    add datasource for performance and switch to native queries
 
 
