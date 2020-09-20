@@ -45,11 +45,11 @@ class FileServiceImplTest {
                 .build();
 
         Mockito.when(fileRepository.save(expectRecord)).thenReturn(expectRecord);
-        Mockito.when(fileRepository.findById(1L)).thenReturn(Optional.of(expectRecord));
+        Mockito.when(fileRepository.findByKey("aaa")).thenReturn(Optional.of(expectRecord));
 
         fileService.uploadFile(file);
 
-        var actualRecord = fileService.getRecord("1");
+        var actualRecord = fileService.getRecord("aaa");
         assertTrue(actualRecord.isPresent());
         assertEquals(expectRecord, actualRecord.get());
     }
@@ -64,9 +64,9 @@ class FileServiceImplTest {
                 .build();
 
         Mockito.when(fileRepository.save(expectRecord)).thenReturn(expectRecord);
-        Mockito.when(fileRepository.findById(1L)).thenReturn(Optional.of(expectRecord));
+        Mockito.when(fileRepository.findByKey("aaa")).thenReturn(Optional.of(expectRecord));
 
-        var actualRecord = fileService.getRecord("1");
+        var actualRecord = fileService.getRecord("aaa");
 
         assertTrue(actualRecord.isPresent());
         assertEquals(expectRecord, actualRecord.get());
@@ -117,9 +117,9 @@ class FileServiceImplTest {
                 .build();
 
         Mockito.when(fileRepository.save(record)).thenReturn(record);
-        Mockito.when(fileRepository.findById(1L)).thenReturn(Optional.empty());
+        Mockito.when(fileRepository.findByKey("aaa")).thenReturn(Optional.empty());
 
-        fileService.removeRecord("1");
-        assertTrue(fileService.getRecord("1").isEmpty());
+        fileService.removeRecord("aaa");
+        assertTrue(fileService.getRecord("aaa").isEmpty());
     }
 }
