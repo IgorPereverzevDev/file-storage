@@ -130,7 +130,7 @@ class FileControllerTest {
     void getRecordsByTimeStampBetweenTimeToAndTimeFromWhenTimeFromMoreThanTimeTo() throws Exception {
         var timeFrom = "2020-09-20 14:54:00.123";
         var timeTo = "2020-09-20 14:54:00.122";
-        var response = "timeFrom must be less than timeTo";
+        var response = "timeFrom must be less than timeTo or equal";
         mockMvc.perform(MockMvcRequestBuilders.get("/records")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .param("timeFrom", timeFrom)
