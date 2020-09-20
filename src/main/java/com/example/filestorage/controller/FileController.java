@@ -1,6 +1,5 @@
 package com.example.filestorage.controller;
 
-import com.example.filestorage.entity.Record;
 import com.example.filestorage.service.FileService;
 import com.example.filestorage.utils.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
-import java.util.Optional;
 
 @RestController
 public class FileController {
@@ -35,20 +33,14 @@ public class FileController {
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.DELETE)
-    public ResponseEntity<String> removedRecord(@RequestParam("id") String id) {
-        if (!Validator.isValidId(id)) {
-            return new ResponseEntity<>("Incorrect id: " + id, HttpStatus.BAD_REQUEST);
-        }
-        fileService.removeRecord(id);
+    public ResponseEntity<String> removedRecord(@RequestParam("key") String key) {
+        fileService.removeRecord(key);
         return new ResponseEntity<>("Record removed", HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value = "/record", method = RequestMethod.GET)
-    public ResponseEntity<?> getRecord(@RequestParam("id") String id) {
-        if (!Validator.isValidId(id)) {
-            return new ResponseEntity<>("Incorrect id: " + id, HttpStatus.BAD_REQUEST);
-        }
-        Optional<Record> record = fileService.getRecord(id);
+    public ResponseEntity<?> getRecord(@RequestParam("key") String key) {
+        var record = fileService.getRecord(key);
         return record.isPresent() ? new ResponseEntity<>(record.get(), HttpStatus.OK) :
                 new ResponseEntity<>("Record not found", HttpStatus.NOT_FOUND);
     }

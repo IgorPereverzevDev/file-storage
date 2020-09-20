@@ -34,13 +34,18 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public void uploadFile(MultipartFile file) {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8))) {
+        try (var reader = new BufferedReader(new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8))) {
             String line;
             reader.readLine();
             while ((line = reader.readLine()) != null && Validator.isValidLine(line)) {
-                String[] data = line.split(FileConstant.SEPARATOR);
+                var data = line.split(FileConstant.SEPARATOR);
                 if (isValidRecord(data)) {
-                    Record record = new Record(Long.parseLong(data[0]), data[1], data[2], Timestamp.valueOf(data[3]));
+                    var record = Record.builder()
+                            .key(data[0])
+                            .name(data[1])
+                            .description(data[2])
+                            .updatedTimeStamp(Timestamp.valueOf(data[3]))
+                            .build();
                     fileRepository.save(record);
                 }
             }
@@ -67,7 +72,7 @@ public class FileServiceImpl implements FileService {
     }
 
     private boolean isValidRecord(String[] data) {
-        return Validator.isValidId(data[0]) && Validator.isValidName(data[1]) && Validator.isValidTimeStamp(data[3]);
+        return Validator.isValidField(data[0]) && Validator.isValidField(data[1]) && Validator.isValidTimeStamp(data[3]);
     }
 
 }

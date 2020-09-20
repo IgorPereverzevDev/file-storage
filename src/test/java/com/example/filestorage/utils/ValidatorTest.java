@@ -18,24 +18,15 @@ class ValidatorTest {
     }
 
     @Test
-    void isValidName() {
-        assertTrue(Validator.isValidName("abc"));
+    void isValidFiled() {
+        assertTrue(Validator.isValidField("abc"));
     }
 
     @Test
     void isInValidName() {
-        assertFalse(Validator.isValidName("123"));
+        assertFalse(Validator.isValidField(",...,!"));
     }
 
-    @Test
-    void isValidId() {
-        assertTrue(Validator.isValidId("123"));
-    }
-
-    @Test
-    void isInValidId() {
-        assertFalse(Validator.isValidId("asbcds!!,,,"));
-    }
 
     @Test
     void isValidTimeStamp() {

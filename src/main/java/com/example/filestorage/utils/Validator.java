@@ -13,15 +13,9 @@ public class Validator {
         return !line.replaceAll("[\\n\\t ]", "").isEmpty();
     }
 
-    public static boolean isValidName(String name) {
-        pattern = Pattern.compile("^[a-z]", Pattern.CASE_INSENSITIVE);
-        matcher = pattern.matcher(name);
-        return matcher.find();
-    }
-
-    public static boolean isValidId(String id) {
-        pattern = Pattern.compile("^[0-9]");
-        matcher = pattern.matcher(id);
+    public static boolean isValidField(String field) {
+        pattern = Pattern.compile("^[a-z0-9]", Pattern.CASE_INSENSITIVE);
+        matcher = pattern.matcher(field);
         return matcher.find();
     }
 
