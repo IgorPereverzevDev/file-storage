@@ -144,7 +144,7 @@ Response example
     
     add datasource for performance and switch to native queries
 
-# Architecture of the service
+# Non-functional requirements
 
     We need to think about fault tolerance, maintainability, scalability and flexibility. 
     
