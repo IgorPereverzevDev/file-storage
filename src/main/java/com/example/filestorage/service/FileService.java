@@ -10,10 +10,10 @@ public interface FileService {
 
     void uploadFile(MultipartFile file);
 
-    Optional<Record> getRecord(String id);
+    Optional<Record> getRecord(String key);
 
     Page<Record> getRecordsByTimeStampBetweenTimeFromAndTimeTo(String TimeFrom, String TimeTo, int page, int size);
 
-    void removeRecord(String id);
+    void removeRecord(String key);
 
 }

@@ -56,8 +56,8 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public Optional<Record> getRecord(String id) {
-        return fileRepository.findById(Long.parseLong(id));
+    public Optional<Record> getRecord(String key) {
+        return fileRepository.findByKey(key);
     }
 
     @Override
@@ -67,8 +67,8 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public void removeRecord(String id) {
-        fileRepository.deleteById(Long.parseLong(id));
+    public void removeRecord(String key) {
+        fileRepository.deleteByKey(key);
     }
 
     private boolean isValidRecord(String[] data) {

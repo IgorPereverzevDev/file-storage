@@ -8,8 +8,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
+import java.util.Optional;
 
 @Repository
 public interface FileRepository extends PagingAndSortingRepository<Record, Long> {
@@ -19,6 +21,10 @@ public interface FileRepository extends PagingAndSortingRepository<Record, Long>
                                                         @Param("timeTo") Timestamp timeTo, Pageable pageable);
 
     @Modifying
+    @Transactional
     @Query("delete from Record r where r.key = ?1")
-    void deleteById(Long id);
+    void deleteByKey(String key);
+
+    @Query("select r from Record r where r.key = ?1")
+    Optional<Record> findByKey(String key);
 }
