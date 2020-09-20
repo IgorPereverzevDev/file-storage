@@ -144,4 +144,8 @@ Response example
     
     add datasource for performance and switch to native queries
 
+# Architecture of the service
 
+    We need to think about fault tolerance, maintainability, scalability and flexibility. All these things can be provided today by cloud infrastructures such as
+    AWS, AZURE, and so on. It is sufficient to support service instances in the event of a failure or failure or migration. Also in the case of high loads, we can   
+    consider reactive patterns, but would we need to be careful the database must support the necessary driver.
