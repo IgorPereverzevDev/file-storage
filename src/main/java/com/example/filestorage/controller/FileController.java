@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.sql.Timestamp;
 import java.util.Optional;
 
 @RestController
@@ -53,15 +54,18 @@ public class FileController {
     }
 
     @RequestMapping(value = "/records", method = RequestMethod.GET)
-    public ResponseEntity<?> getRecordsByDateBetween(@RequestParam(value = "fromDate") String fromDate,
-                                                     @RequestParam(value = "toDate") String toDate,
-                                                     @RequestParam(name = "page", defaultValue = "0") int page,
-                                                     @RequestParam(name = "size", defaultValue = "10") int size) {
+    public ResponseEntity<?> getRecordsByTimeStampBetweenFromDateAndToDate(@RequestParam(value = "fromDate") String fromDate,
+                                                          @RequestParam(value = "toDate") String toDate,
+                                                          @RequestParam(name = "page", defaultValue = "0") int page,
+                                                          @RequestParam(name = "size", defaultValue = "10") int size) {
         if (!Validator.isValidTimeStamp(fromDate)) {
             return new ResponseEntity<>("Incorrect fromDate: " + fromDate, HttpStatus.BAD_REQUEST);
         } else if (!Validator.isValidTimeStamp(toDate)) {
             return new ResponseEntity<>("Incorrect toDate: " + toDate, HttpStatus.BAD_REQUEST);
+        }else if(Timestamp.valueOf(fromDate).after(Timestamp.valueOf(toDate))){
+            return new ResponseEntity<>("fromDate must be less than toDate", HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(fileService.getRecordsByDateBetween(fromDate, toDate, page, size), HttpStatus.OK);
+        return new ResponseEntity<>(fileService.getRecordsByTimeStampBetweenFromDateAndToDate(fromDate, toDate, page, size), HttpStatus.OK);
     }
+
 }

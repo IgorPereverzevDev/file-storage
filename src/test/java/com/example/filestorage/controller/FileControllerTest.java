@@ -28,7 +28,7 @@ class FileControllerTest {
     FileService fileService;
 
     @Test
-    void uploadFileSuccess() throws Exception {
+    void uploadFile() throws Exception {
         String response = "Your file was uploaded successfully";
         String data = "abc";
         MockMultipartFile file = new MockMultipartFile("file", "", "text/plain", data.getBytes());
@@ -39,7 +39,7 @@ class FileControllerTest {
     }
 
     @Test
-    void uploadFileIsEmpty() throws Exception {
+    void uploadFileWhenFileIsEmpty() throws Exception {
         String response = "Empty file";
         MockMultipartFile file = new MockMultipartFile("file", "", "text/plain", "".getBytes());
         mockMvc.perform(MockMvcRequestBuilders.multipart("/upload")
@@ -49,7 +49,7 @@ class FileControllerTest {
     }
 
     @Test
-    void removedRecordSuccess() throws Exception {
+    void removedRecord() throws Exception {
         String id = "1";
         String response = "Record removed";
         mockMvc.perform(MockMvcRequestBuilders.delete("/remove")
@@ -60,7 +60,7 @@ class FileControllerTest {
     }
 
     @Test
-    void removedRecordFail() throws Exception {
+    void removedRecordWhenIdInvalid() throws Exception {
         String id = "abc";
         String response = "Incorrect id: " + id;
         mockMvc.perform(MockMvcRequestBuilders.delete("/remove")
@@ -71,7 +71,7 @@ class FileControllerTest {
     }
 
     @Test
-    void getRecordSuccess() throws Exception {
+    void getRecord() throws Exception {
         String id = "1";
         Optional<Record> record = Optional.of(new Record());
         Mockito.when(fileService.getRecord(id)).thenReturn(record);
@@ -82,7 +82,7 @@ class FileControllerTest {
     }
 
     @Test
-    void getRecordFail() throws Exception {
+    void getRecordWhenIdInvalid() throws Exception {
         String id = "abc";
         String response = "Incorrect id: " + id;
         mockMvc.perform(MockMvcRequestBuilders.get("/record")
@@ -93,7 +93,7 @@ class FileControllerTest {
     }
 
     @Test
-    void getRecordFailNull() throws Exception {
+    void getRecordWhenRecordIsNotFound() throws Exception {
         String id = "1";
         String response = "Record not found";
         Mockito.when(fileService.getRecord(id)).thenReturn(Optional.empty());
@@ -105,10 +105,10 @@ class FileControllerTest {
     }
 
     @Test
-    void getRecordsByDateBetweenSuccess() throws Exception {
+    void getRecordsByTimeStampBetweenFromDateAndToDate() throws Exception {
         String fromDate = "2020-09-20 14:54:00.121";
         String toDate = "2020-09-20 14:54:00.122";
-        Mockito.when(fileService.getRecordsByDateBetween(fromDate, toDate, 0, 10)).thenReturn(Page.empty());
+        Mockito.when(fileService.getRecordsByTimeStampBetweenFromDateAndToDate(fromDate, toDate, 0, 10)).thenReturn(Page.empty());
         mockMvc.perform(MockMvcRequestBuilders.get("/records")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .param("fromDate", fromDate)
@@ -117,7 +117,7 @@ class FileControllerTest {
     }
 
     @Test
-    void getRecordsByDateBetweenFailFromDate() throws Exception {
+    void getRecordsByTimeStampBetweenWhenFromDateIncorrect() throws Exception {
         String fromDate = "abc";
         String toDate = "2020-09-20 14:54:00.122";
         String response = "Incorrect fromDate: " + fromDate;
@@ -130,10 +130,23 @@ class FileControllerTest {
     }
 
     @Test
-    void getRecordsByDateBetweenFailToDate() throws Exception {
+    void getRecordsByTimeStampBetweenWhenToDateIncorrect() throws Exception {
         String fromDate = "2020-09-20 14:54:00.122";
         String toDate = "abc";
         String response = "Incorrect toDate: " + toDate;
+        mockMvc.perform(MockMvcRequestBuilders.get("/records")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .param("fromDate", fromDate)
+                .param("toDate", toDate))
+                .andExpect(status().is(400))
+                .andExpect(content().string(response));
+    }
+
+    @Test
+    void getRecordsByTimeStampBetweenToDateAndFromDateWhenFromDateMoreLessToDate() throws Exception {
+        String fromDate = "2020-09-20 14:54:00.123";
+        String toDate = "2020-09-20 14:54:00.122";
+        String response = "fromDate must be less than toDate";
         mockMvc.perform(MockMvcRequestBuilders.get("/records")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .param("fromDate", fromDate)

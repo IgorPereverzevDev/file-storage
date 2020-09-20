@@ -56,7 +56,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public Page<Record> getRecordsByDateBetween(String fromDate, String toDate, int page, int size) {
+    public Page<Record> getRecordsByTimeStampBetweenFromDateAndToDate(String fromDate, String toDate, int page, int size) {
         return fileRepository.findAllRecordsByUpdateTimeStampBetween(
                 Timestamp.valueOf(fromDate), Timestamp.valueOf(toDate), PageRequest.of(page, size));
     }
