@@ -45,7 +45,7 @@ http://localhost:8080/remove
 
 
 # Request and Response
-Upload file
+## Upload file
 
 Request
 
@@ -54,7 +54,74 @@ Request
 Response
 
     Your file was uploaded successfully
+
+## Get Record
+
+Request example
+        
+     key:key
+     value: aaa
+Response example
+
+    {
+        "id": 1,
+        "key": "aaa",
+        "name": "name",
+        "description": "description",
+        "updatedTimeStamp": "2020-09-20T12:54:00.121+00:00"
+    }
+
+
+## Get Records
+
+Request example
+        
+     timeFrom:2020-09-20 14:54:00.121
+     timeTo: 2020-09-20 14:54:00.121
+Response example
+
+
+     {
+   
+        "content": [
     
+        {
+            "id": 1,
+            "key": "aaa",
+            "name": "name",
+            "description": "description",
+            "updatedTimeStamp": "2020-09-20T12:54:00.121+00:00"
+        }
+        
+    ],
+    
+    "pageable": {
+        "sort": {
+            "sorted": false,
+            "unsorted": true,
+            "empty": true
+        },
+        "offset": 0,
+        "pageNumber": 0,
+        "pageSize": 10,
+        "paged": true,
+        "unpaged": false
+    },
+    
+    "totalPages": 1,
+    "totalElements": 1,
+    "last": true,
+    "size": 10,
+    "number": 0,
+    "sort": {
+        "sorted": false,
+        "unsorted": true,
+        "empty": true
+    },
+        "numberOfElements": 1,
+        "first": true,
+        "empty": false
+    }
     
     
     
