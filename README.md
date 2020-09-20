@@ -45,6 +45,18 @@ http://localhost:8080/remove
 
 
 # Request and Response
+Upload file
 
+Request
+
+     key:file
+     value:textfile.txt (get from the repository)
+Response
+
+    Your file was uploaded successfully
+    
+    
+    
+    
 
 
