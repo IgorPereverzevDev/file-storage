@@ -49,8 +49,8 @@ http://localhost:8080/remove
 
 Request
 
-     key:file
-     value:textfile.txt (get from the repository)
+     key: file
+     value: textfile.txt (get from the repository)
 Response
 
     Your file was uploaded successfully
@@ -59,7 +59,7 @@ Response
 
 Request example
         
-     key:key
+     key: key
      value: aaa
 Response example
 
@@ -76,7 +76,7 @@ Response example
 
 Request example
         
-     timeFrom:2020-09-20 14:54:00.121
+     timeFrom: 2020-09-20 14:54:00.121
      timeTo: 2020-09-20 14:54:00.121
 Response example
 
@@ -123,6 +123,17 @@ Response example
         "empty": false
     }
     
+
+## Remove Record
+
+Request example
+        
+     key: key
+     value: aaa
+     
+Response example
+
+    Record removed
     
     
 
