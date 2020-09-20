@@ -152,3 +152,10 @@ Response example
     
     It is sufficient to support service instances in the event of a failure or failure or migration. Also in the case of high loads, we can   
     consider reactive patterns, but would we need to be careful the database must support the necessary driver.
+    
+    We should also consider security issues (for example SQL injection etc) and monitoring (for example logging, tracing, profiling etc)
+
+# Pipeline
+  
+  We can use Docker and Kubernetes for delivery to the client
+    
