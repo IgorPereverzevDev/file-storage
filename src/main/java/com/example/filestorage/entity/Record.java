@@ -15,8 +15,6 @@ import java.sql.Timestamp;
 public class Record {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "record_generator")
-    @SequenceGenerator(name="record_generator", sequenceName = "record_seq")
     private Long id;
     private String name;
     private String description;

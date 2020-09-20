@@ -54,18 +54,18 @@ public class FileController {
     }
 
     @RequestMapping(value = "/records", method = RequestMethod.GET)
-    public ResponseEntity<?> getRecordsByTimeStampBetweenFromDateAndToDate(@RequestParam(value = "fromDate") String fromDate,
-                                                          @RequestParam(value = "toDate") String toDate,
-                                                          @RequestParam(name = "page", defaultValue = "0") int page,
-                                                          @RequestParam(name = "size", defaultValue = "10") int size) {
-        if (!Validator.isValidTimeStamp(fromDate)) {
-            return new ResponseEntity<>("Incorrect fromDate: " + fromDate, HttpStatus.BAD_REQUEST);
-        } else if (!Validator.isValidTimeStamp(toDate)) {
-            return new ResponseEntity<>("Incorrect toDate: " + toDate, HttpStatus.BAD_REQUEST);
-        }else if(Timestamp.valueOf(fromDate).after(Timestamp.valueOf(toDate))){
-            return new ResponseEntity<>("fromDate must be less than toDate", HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> getRecordsByTimeStampBetweenTimeFromAndTimeTo(@RequestParam(value = "timeFrom") String timeFrom,
+                                                                           @RequestParam(value = "timeTo") String timeTo,
+                                                                           @RequestParam(name = "page", defaultValue = "0") int page,
+                                                                           @RequestParam(name = "size", defaultValue = "10") int size) {
+        if (!Validator.isValidTimeStamp(timeFrom)) {
+            return new ResponseEntity<>("Incorrect timeFrom: " + timeFrom, HttpStatus.BAD_REQUEST);
+        } else if (!Validator.isValidTimeStamp(timeTo)) {
+            return new ResponseEntity<>("Incorrect timeTo: " + timeTo, HttpStatus.BAD_REQUEST);
+        }else if(Timestamp.valueOf(timeFrom).after(Timestamp.valueOf(timeTo))){
+            return new ResponseEntity<>("timeFrom must be less than timeTo", HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(fileService.getRecordsByTimeStampBetweenFromDateAndToDate(fromDate, toDate, page, size), HttpStatus.OK);
+        return new ResponseEntity<>(fileService.getRecordsByTimeStampBetweenTimeFromAndTimeTo(timeFrom, timeTo, page, size), HttpStatus.OK);
     }
 
 }

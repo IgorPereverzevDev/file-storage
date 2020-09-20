@@ -12,7 +12,7 @@ public interface FileService {
 
     Optional<Record> getRecord(String id);
 
-    Page<Record> getRecordsByTimeStampBetweenFromDateAndToDate(String fromDate, String toDate, int page, int size);
+    Page<Record> getRecordsByTimeStampBetweenTimeFromAndTimeTo(String TimeFrom, String TimeTo, int page, int size);
 
     void removeRecord(String id);
 

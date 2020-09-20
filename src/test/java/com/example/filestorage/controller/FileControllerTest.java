@@ -22,10 +22,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class FileControllerTest {
 
     @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     @MockBean
-    FileService fileService;
+    private FileService fileService;
 
     @Test
     void uploadFile() throws Exception {
@@ -105,52 +105,52 @@ class FileControllerTest {
     }
 
     @Test
-    void getRecordsByTimeStampBetweenFromDateAndToDate() throws Exception {
-        String fromDate = "2020-09-20 14:54:00.121";
-        String toDate = "2020-09-20 14:54:00.122";
-        Mockito.when(fileService.getRecordsByTimeStampBetweenFromDateAndToDate(fromDate, toDate, 0, 10)).thenReturn(Page.empty());
+    void getRecordsByTimeStampBetweenTimeFromAndTimeTo() throws Exception {
+        String timeFrom = "2020-09-20 14:54:00.121";
+        String timeTo = "2020-09-20 14:54:00.122";
+        Mockito.when(fileService.getRecordsByTimeStampBetweenTimeFromAndTimeTo(timeFrom, timeTo, 0, 10)).thenReturn(Page.empty());
         mockMvc.perform(MockMvcRequestBuilders.get("/records")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .param("fromDate", fromDate)
-                .param("toDate", toDate))
+                .param("timeFrom", timeFrom)
+                .param("timeTo", timeTo))
                 .andExpect(status().is(200));
     }
 
     @Test
-    void getRecordsByTimeStampBetweenWhenFromDateIncorrect() throws Exception {
-        String fromDate = "abc";
-        String toDate = "2020-09-20 14:54:00.122";
-        String response = "Incorrect fromDate: " + fromDate;
+    void getRecordsByTimeStampBetweenWhenTimeFromIncorrect() throws Exception {
+        String timeFrom = "abc";
+        String timeTo = "2020-09-20 14:54:00.122";
+        String response = "Incorrect timeFrom: " + timeFrom;
         mockMvc.perform(MockMvcRequestBuilders.get("/records")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .param("fromDate", fromDate)
-                .param("toDate", toDate))
+                .param("timeFrom", timeFrom)
+                .param("timeTo", timeTo))
                 .andExpect(status().is(400))
                 .andExpect(content().string(response));
     }
 
     @Test
-    void getRecordsByTimeStampBetweenWhenToDateIncorrect() throws Exception {
-        String fromDate = "2020-09-20 14:54:00.122";
-        String toDate = "abc";
-        String response = "Incorrect toDate: " + toDate;
+    void getRecordsByTimeStampBetweenWhenTimeToIncorrect() throws Exception {
+        String timeFrom = "2020-09-20 14:54:00.122";
+        String timeTo = "abc";
+        String response = "Incorrect timeTo: " + timeTo;
         mockMvc.perform(MockMvcRequestBuilders.get("/records")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .param("fromDate", fromDate)
-                .param("toDate", toDate))
+                .param("timeFrom", timeFrom)
+                .param("timeTo", timeTo))
                 .andExpect(status().is(400))
                 .andExpect(content().string(response));
     }
 
     @Test
-    void getRecordsByTimeStampBetweenToDateAndFromDateWhenFromDateMoreLessToDate() throws Exception {
-        String fromDate = "2020-09-20 14:54:00.123";
-        String toDate = "2020-09-20 14:54:00.122";
-        String response = "fromDate must be less than toDate";
+    void getRecordsByTimeStampBetweenTimeToAndTimeFromWhenTimeFromMoreThanTimeTo() throws Exception {
+        String timeFrom = "2020-09-20 14:54:00.123";
+        String timeTo = "2020-09-20 14:54:00.122";
+        String response = "timeFrom must be less than timeTo";
         mockMvc.perform(MockMvcRequestBuilders.get("/records")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .param("fromDate", fromDate)
-                .param("toDate", toDate))
+                .param("timeFrom", timeFrom)
+                .param("timeTo", timeTo))
                 .andExpect(status().is(400))
                 .andExpect(content().string(response));
     }

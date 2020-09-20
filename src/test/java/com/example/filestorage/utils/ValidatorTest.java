@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ValidatorTest {
 
-
     @Test
     void isValidLine() {
         assertTrue(Validator.isValidLine("\t\t\t\tabc"));

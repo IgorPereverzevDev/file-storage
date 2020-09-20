@@ -15,8 +15,8 @@ import java.sql.Timestamp;
 public interface FileRepository extends PagingAndSortingRepository<Record, Long> {
 
     @Query(value = "from Record r where r.updatedTimeStamp BETWEEN ?1 AND ?2")
-    Page<Record> findAllRecordsByUpdateTimeStampBetween(@Param("fromDate") Timestamp fromDate,
-                                                        @Param("toDate") Timestamp toDate, Pageable pageable);
+    Page<Record> findAllRecordsByUpdateTimeStampBetween(@Param("DateFrom") Timestamp DateFrom,
+                                                        @Param("DateTo") Timestamp DateTo, Pageable pageable);
 
     @Modifying
     @Query("delete from Record r where r.id = ?1")
