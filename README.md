@@ -22,6 +22,13 @@ Design and implement REST interface to consume data-snapshots from one client, v
 
 4.	Service owner can prevent persistence of all records from client-file what contains invalid rows
 
+# Maven
+   
+    Build the project:
+
+    $ mvn package
+
+
 # API
 
 Upload file
