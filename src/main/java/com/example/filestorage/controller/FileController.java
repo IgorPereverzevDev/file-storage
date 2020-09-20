@@ -49,7 +49,7 @@ public class FileController {
             return new ResponseEntity<>("Incorrect id: " + id, HttpStatus.BAD_REQUEST);
         }
         Optional<Record> record = fileService.getRecord(id);
-        return record.isPresent() ? new ResponseEntity<>(record, HttpStatus.OK) :
+        return record.isPresent() ? new ResponseEntity<>(record.get(), HttpStatus.OK) :
                 new ResponseEntity<>("Record not found", HttpStatus.NOT_FOUND);
     }
 

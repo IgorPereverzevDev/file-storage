@@ -9,7 +9,7 @@ public class Validator {
     private static Matcher matcher;
 
 
-    public static boolean isValid(String line) {
+    public static boolean isValidLine(String line) {
         return !line.replaceAll("[\\n\\t ]", "").isEmpty();
     }
 

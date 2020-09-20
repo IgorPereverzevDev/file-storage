@@ -37,7 +37,7 @@ public class FileServiceImpl implements FileService {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8))) {
             String line;
             reader.readLine();
-            while ((line = reader.readLine()) != null && Validator.isValid(line)) {
+            while ((line = reader.readLine()) != null && Validator.isValidLine(line)) {
                 String[] data = line.split(FileConstant.SEPARATOR);
                 if (isValidRecord(data)) {
                     Record record = new Record(Long.parseLong(data[0]), data[1], data[2], Timestamp.valueOf(data[3]));
