@@ -6,7 +6,6 @@ import lombok.experimental.Tolerate;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -16,10 +15,8 @@ import java.util.Objects;
 @Getter
 public class Record {
 
-    @Id
-    @GeneratedValue
-    private Long id;
 
+    @Id
     @NaturalId
     private String key;
 
@@ -28,7 +25,8 @@ public class Record {
     private Timestamp updatedTimeStamp;
 
     @Tolerate
-    public Record() {}
+    public Record() {
+    }
 
     @Override
     public boolean equals(Object o) {

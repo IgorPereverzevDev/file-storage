@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 import java.util.Optional;
 
 @Repository
-public interface FileRepository extends PagingAndSortingRepository<Record, Long> {
+public interface FileRepository extends PagingAndSortingRepository<Record, String> {
 
     @Query(value = "from Record r where r.updatedTimeStamp BETWEEN ?1 AND ?2")
     Page<Record> findAllRecordsByUpdateTimeStampBetween(@Param("timeFrom") Timestamp timeFrom,
