@@ -41,15 +41,6 @@ class FileControllerTest {
                 .andExpect(content().string(response));
     }
 
-    @Test
-    void uploadFileWhenFileIsEmpty() throws Exception {
-        var response = "Empty file";
-        var file = new MockMultipartFile("file", "", "text/plain", "".getBytes());
-        mockMvc.perform(MockMvcRequestBuilders.multipart("/upload")
-                .file(file))
-                .andExpect(status().is(400))
-                .andExpect(content().string(response));
-    }
 
     @Test
     void removedRecord() throws Exception {
