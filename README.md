@@ -64,7 +64,6 @@ Request example
 Response example
 
     {
-        "id": 1,
         "key": "aaa",
         "name": "name",
         "description": "description",
@@ -86,7 +85,6 @@ Response example
         "content": [
     
         {
-            "id": 1,
             "key": "aaa",
             "name": "name",
             "description": "description",
