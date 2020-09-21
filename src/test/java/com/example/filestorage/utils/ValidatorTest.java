@@ -18,23 +18,16 @@ class ValidatorTest {
     }
 
     @Test
-    void isValidFiled() {
-        assertTrue(Validator.isValidField("abc"));
+    void isValid() {
+        String[] arr = {"abc", "name", "desc", "2020-09-20 14:54:00.121"};
+        assertTrue(Validator.isValid(arr));
     }
 
     @Test
-    void isInValidName() {
-        assertFalse(Validator.isValidField(",...,!"));
+    void isValidFail() {
+        String[] arr = {"", "name", "desc", "2020-09-20 14:54:00.121"};
+        assertFalse(Validator.isValid(arr));
     }
 
 
-    @Test
-    void isValidTimeStamp() {
-        assertTrue(Validator.isValidTimeStamp("2020-09-20 14:54:00.121"));
-    }
-
-    @Test
-    void isInValidTimeStamp() {
-        assertFalse(Validator.isValidTimeStamp("aaaaa020-09-20 14:54:00.121!!!!"));
-    }
 }

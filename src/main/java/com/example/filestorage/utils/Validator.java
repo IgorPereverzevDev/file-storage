@@ -13,7 +13,11 @@ public class Validator {
         return !line.replaceAll("[\\n\\t ]", "").isEmpty();
     }
 
-    public static boolean isValidField(String field) {
+    public static boolean isValid(String[] data) {
+        return Validator.isValidField(data[0]) && Validator.isValidField(data[1]) && Validator.isValidTimeStamp(data[3]);
+    }
+
+    private static boolean isValidField(String field) {
         pattern = Pattern.compile("^[a-z0-9]", Pattern.CASE_INSENSITIVE);
         matcher = pattern.matcher(field);
         return matcher.find();

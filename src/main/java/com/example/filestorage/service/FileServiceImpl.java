@@ -46,7 +46,7 @@ public class FileServiceImpl implements FileService {
             reader.readLine();
             while ((line = reader.readLine()) != null && Validator.isValidLine(line)) {
                 var data = line.split(FileConstant.SEPARATOR);
-                if (isValidRecord(data)) {
+                if (Validator.isValid(data)) {
                     var record = Record.builder()
                             .key(data[0])
                             .name(data[1])
@@ -78,10 +78,6 @@ public class FileServiceImpl implements FileService {
     @Override
     public void removeRecord(String key) {
         fileRepository.deleteByKey(key);
-    }
-
-    private boolean isValidRecord(String[] data) {
-        return Validator.isValidField(data[0]) && Validator.isValidField(data[1]) && Validator.isValidTimeStamp(data[3]);
     }
 
 }
