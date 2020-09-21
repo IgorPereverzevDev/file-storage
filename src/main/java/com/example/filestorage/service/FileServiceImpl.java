@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -34,6 +36,11 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public void uploadFile(MultipartFile file) {
+        retrieveRecords(file).forEach(fileRepository::save);
+    }
+
+    private List<Record> retrieveRecords(MultipartFile file) {
+        List<Record> records = new ArrayList<>();
         try (var reader = new BufferedReader(new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8))) {
             String line;
             reader.readLine();
@@ -46,14 +53,16 @@ public class FileServiceImpl implements FileService {
                             .description(data[2])
                             .updatedTimeStamp(Timestamp.valueOf(data[3]))
                             .build();
-                    fileRepository.save(record);
+                    records.add(record);
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
             logger.info("Invalid data format");
         }
+        return records;
     }
+
 
     @Override
     public Optional<Record> getRecord(String key) {
