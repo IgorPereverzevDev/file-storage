@@ -9,10 +9,6 @@ public class Validator {
     private static Matcher matcher;
 
 
-    public static boolean isValidLine(String line) {
-        return !line.replaceAll("[\\n\\t ]", "").isEmpty();
-    }
-
     public static boolean isValid(String[] data) {
         return Validator.isValidField(data[0]) && Validator.isValidField(data[1]) && Validator.isValidTimeStamp(data[3]);
     }

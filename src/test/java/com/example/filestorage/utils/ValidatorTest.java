@@ -8,16 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class ValidatorTest {
 
     @Test
-    void isValidLine() {
-        assertTrue(Validator.isValidLine("\t\t\t\tabc"));
-    }
-
-    @Test
-    void isInValidLine() {
-        assertFalse(Validator.isValidLine("\t\t\t\t"));
-    }
-
-    @Test
     void isValid() {
         String[] arr = {"abc", "name", "desc", "2020-09-20 14:54:00.121"};
         assertTrue(Validator.isValid(arr));
