@@ -25,9 +25,6 @@ public class FileController {
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
-        if (file.isEmpty()) {
-            return new ResponseEntity<>("Empty file", HttpStatus.BAD_REQUEST);
-        }
         fileService.uploadFile(file);
         return new ResponseEntity<>("Your file was uploaded successfully", HttpStatus.ACCEPTED);
     }
