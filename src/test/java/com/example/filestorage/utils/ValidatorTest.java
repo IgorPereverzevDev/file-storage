@@ -19,5 +19,4 @@ class ValidatorTest {
         assertFalse(Validator.isValid(arr));
     }
 
-
 }

@@ -44,7 +44,7 @@ public class FileServiceImpl implements FileService {
         try (var reader = new BufferedReader(new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8))) {
             String line;
             reader.readLine();
-            while ((line = reader.readLine()) != null && lineIsEmpty(line)) {
+            while ((line = reader.readLine()) != null && clean(line).isEmpty()) {
                 var data = line.split(FileConstant.SEPARATOR);
                 if (Validator.isValid(data)) {
                     var record = Record.builder()
@@ -81,7 +81,7 @@ public class FileServiceImpl implements FileService {
     }
 
 
-    private boolean lineIsEmpty(String line) {
-        return !line.replaceAll("[\\n\\t ]", "").isEmpty();
+    private String clean(String line) {
+        return line.replaceAll("[\\n\\t ]", "");
     }
 }
