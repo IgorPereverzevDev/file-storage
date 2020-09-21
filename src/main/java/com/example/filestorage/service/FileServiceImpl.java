@@ -44,7 +44,7 @@ public class FileServiceImpl implements FileService {
         try (var reader = new BufferedReader(new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8))) {
             String line;
             reader.readLine();
-            while ((line = reader.readLine()) != null && clean(line).isEmpty()) {
+            while ((line = reader.readLine()) != null && !clean(line).isEmpty()) {
                 var data = line.split(FileConstant.SEPARATOR);
                 if (Validator.isValid(data)) {
                     var record = Record.builder()
