@@ -51,7 +51,7 @@ public class FileController {
             return new ResponseEntity<>("Incorrect timeFrom: " + timeFrom, HttpStatus.BAD_REQUEST);
         } else if (!Validator.isValidTimeStamp(timeTo)) {
             return new ResponseEntity<>("Incorrect timeTo: " + timeTo, HttpStatus.BAD_REQUEST);
-        }else if(Timestamp.valueOf(timeFrom).after(Timestamp.valueOf(timeTo))){
+        } else if (Timestamp.valueOf(timeFrom).after(Timestamp.valueOf(timeTo))) {
             return new ResponseEntity<>("timeFrom must be less than timeTo or equal", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(fileService.getRecordsByTimeStampBetweenTimeFromAndTimeTo(timeFrom, timeTo, page, size), HttpStatus.OK);
