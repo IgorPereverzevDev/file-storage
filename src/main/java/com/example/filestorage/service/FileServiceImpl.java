@@ -57,8 +57,7 @@ public class FileServiceImpl implements FileService {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
-            logger.info("Invalid data format");
+            logger.error("Invalid data format ", e);
         }
         return records;
     }
