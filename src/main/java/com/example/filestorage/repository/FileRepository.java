@@ -7,13 +7,11 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.Optional;
 
-@Repository
 public interface FileRepository extends PagingAndSortingRepository<Record, String> {
 
     @Query(value = "from Record r where r.updatedTimeStamp BETWEEN ?1 AND ?2")
